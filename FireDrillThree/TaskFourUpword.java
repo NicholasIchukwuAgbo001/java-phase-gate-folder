@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class taskFourUpword{
+public class TaskFourUpword{
 
 public static int[] taskFour(int[] arrays){
 
