@@ -1,27 +1,26 @@
 import java.util.Scanner;
 
-public class TaskSeven{
-
+public class taskSeven{
 public static void main(String[] args){
 
 Scanner userInputCollection = new Scanner(System.in);
 
-int sumOfEven = 0;
-int userInput = 0;
-int average = 0;
+double scores = 0;
+double sum = 0;
+double average = 0;
+int increment = 0;
 
 for(int count = 1; count <= 10; count++){
-System.out.print("Enter a number: ");
-userInput = userInputCollection.nextInt();
-
-if(userInput % 2 == 0){
-sumOfEven += count;
+System.out.print("Enter Score" + (count) + ": ");
+scores = userInputCollection.nextDouble();
+if(scores % 2 == 0){
+sum += scores;
+increment++;
 }
 }
-
-average = sumOfEven/ userInput;
-System.out.println("Sum: " + sumOfEven);
-System.out.println("Average: " + average);
-  }
+average = sum/increment;
+System.out.println("Sum of even numbers: " + sum);
+System.out.println("Average of even numbers: " + average);
+ }
 
 }

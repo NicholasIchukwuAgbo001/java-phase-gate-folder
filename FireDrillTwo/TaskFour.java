@@ -1,24 +1,23 @@
 import java.util.Scanner;
 
-public class TaskFour{
-
+public class taskFour{
 public static void main(String[] args){
 
 Scanner userInputCollection = new Scanner(System.in);
 
-int sum = 0;
-int userInput = 0;
+double scores = 0;
+double sum = 0;
+double average = 0;
 
 for(int count = 1; count <= 10; count++){
-System.out.print("Enter a number: ");
-userInput = userInputCollection.nextInt();
-
+System.out.print("Enter Score" + (count) + ": ");
+scores = userInputCollection.nextDouble();
 if(count % 2 == 0){
-sum += userInput;
+sum += scores;
 }
 }
 
-System.out.print("sum of index (2,4,6,8,10): " + sum);
-  }
+System.out.println("Sum of even indexes: " + sum);
+ }
 
 }

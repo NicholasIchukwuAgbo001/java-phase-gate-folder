@@ -1,27 +1,26 @@
 import java.util.Scanner;
 
-public class TaskEight{
-
+public class taskEight{
 public static void main(String[] args){
 
 Scanner userInputCollection = new Scanner(System.in);
 
-int sum = 0;
-int userInput = 0;
+double scores = 0;
+double sum = 0;
+double average = 0;
+int increment = 0;
 
 for(int count = 1; count <= 10; count++){
-System.out.print("Enter a number between 0 - 100: ");
-userInput = userInputCollection.nextInt();
-
-if(userInput < 0 || userInput > 100){
-System.out.println("invalid, try again");
-}else{
-sum += userInput;
+System.out.print("Enter Score (0 - 100) ->" + (count) + ": ");
+scores = userInputCollection.nextDouble();
+if(scores < 0 || scores > 100){System.out.print("invalid number, enter number between (0 - 100)");
+} else{
+sum += scores;
  }
 }
 
-System.out.println("Sum of valid numbers: " + sum);
-
-  }
+System.out.println("Sum of even numbers: " + sum);
+System.out.println("Average of even numbers: " + average);
+ }
 
 }

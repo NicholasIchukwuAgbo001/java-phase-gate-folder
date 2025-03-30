@@ -1,27 +1,26 @@
 import java.util.Scanner;
 
-public class TaskNine{
-
+public class taskNine{
 public static void main(String[] args){
 
 Scanner userInputCollection = new Scanner(System.in);
 
-int sum = 0;
-int userInput = 0;
+double scores = 0;
+double sum = 0;
+double average = 0;
+int increment = 0;
 
 for(int count = 1; count <= 10; count++){
-System.out.print("Enter a number between 1 - 100: ");
-userInput = userInputCollection.nextInt();
-
-if(userInput < 1 || userInput > 100){
+System.out.print("Enter Score (0 - 100) ->" + (count) + ": ");
+scores = userInputCollection.nextDouble();
+if(scores < 0 || scores > 100){
 continue;
-}else{
-sum += userInput;
+} else{
+sum += scores;
  }
 }
 
-System.out.println("Sum of valid numbers: " + sum);
-
-  }
+System.out.println("Sum of even numbers: " + sum);
+ }
 
 }

@@ -1,30 +1,28 @@
 import java.util.Scanner;
 
-public class TaskTen{
-
+public class taskTen{
 public static void main(String[] args){
 
 Scanner userInputCollection = new Scanner(System.in);
 
-int sum = 0;
-int userInput = 0;
-int average = 0;
+double scores = 0;
+double sum = 0;
+double average = 0;
+int increment = 0;
 
 for(int count = 1; count <= 10; count++){
-System.out.print("Enter a number between 1 - 100: ");
-userInput = userInputCollection.nextInt();
-
-if(userInput < 1 || userInput > 100){
+System.out.print("Enter Score (0 - 100) ->" + (count) + ": ");
+scores = userInputCollection.nextDouble();
+if(scores < 0 || scores > 100){
 continue;
-}else{
-sum += userInput;
+} else{
+sum += scores;
+increment++;
  }
 }
 
-average = sum/userInput;
-
+average = sum/increment;
 System.out.println("Average of valid numbers: " + average);
-
-  }
+ }
 
 }

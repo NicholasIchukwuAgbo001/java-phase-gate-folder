@@ -1,21 +1,21 @@
 import java.util.Scanner;
 
-public class TaskOne{
-
+public class taskOne{
 public static void main(String[] args){
 
-Scanner userInput = new Scanner(System.in);
+Scanner userInputCollection = new Scanner(System.in);
 
-int sum = 0;
-int input = 0;
+double scores = 0;
+double sum = 0;
 
-for(int counter = 1; counter <= 10; counter++){
-System.out.print("Enter a number: ");
-input = userInput.nextInt();
-sum += input;
+for(int count = 1; count <= 10; count++){
+System.out.print("Enter Score" + (count) + ": ");
+scores = userInputCollection.nextDouble();
+sum += scores;
 }
 
-System.out.print("Sum is: " + sum);
-  }
+
+System.out.print("Sum: " + sum);
+ }
 
 }
