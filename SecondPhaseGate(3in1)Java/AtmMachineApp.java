@@ -39,15 +39,15 @@ public class AtmMachineApp {
     }
 
     public void depositMoney(int pin, double amount) {
+        if(amount <= 0) {
+            throw new IllegalArgumentException("Amount must be greater than 0.");
+        }
         if(this.pin == pin && !isClosed) {
             balance += amount;
         }else if(this.pin != pin) {
             throw new IllegalArgumentException("Invalid pin");
-        } else {
-            throw new IllegalArgumentException("Account closed");
         }
     }
-
 
     public void withdrawMoney(int pin, double amount) {
         if(this.pin == pin && !isClosed && this.balance >= amount) {
@@ -56,7 +56,7 @@ public class AtmMachineApp {
             throw new IllegalArgumentException("Invalid pin");
         }else if(isClosed) {
             throw new IllegalArgumentException("Account closed");
-        } else if(this.balance >= amount) {
+        } else if(amount > this.balance) {
             throw new IllegalArgumentException("Insufficient balance");
         }
     }
@@ -64,11 +64,13 @@ public class AtmMachineApp {
     public void transferMoney(AtmMachineApp account2, double amount, int pin) {
       if(this.pin == pin && !isClosed && this.balance >= amount) {
           this.withdrawMoney(pin, amount);
-          account2.depositMoney(pin,amount);
+          account2.depositMoney(account2.getPin(), amount);
       }else if(this.pin != pin) {
           throw new IllegalArgumentException("Invalid pin");
       }else if(isClosed) {
           throw new IllegalArgumentException("Account closed");
+      }else if(amount > this.balance) {
+          throw new IllegalArgumentException("Insufficient balance");
       }
     }
 

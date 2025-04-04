@@ -36,30 +36,78 @@ public class AtmMachineAppTest {
     @Test
     public void testDepositMoney() {
         account1.depositMoney(1010,100);
-        assertEquals(100, account1.getBalance(), 0.01);
+        assertEquals(100, account1.getBalance(), 0.00);
+    }
+
+    @Test
+    public void testDepositAmountIsLessThanZero_throwException() {
+        assertThrows(IllegalArgumentException.class, () -> account1.depositMoney(1010, -200));
+    }
+
+    @Test
+    public void testInvalidPinWhenDepositingMoney_throwException() {
+        assertThrows(IllegalArgumentException.class, () -> account1.depositMoney(1234, 200));
     }
 
     @Test
     public void testWithdrawMoney() {
         account1.depositMoney(1010,500);
         account1.withdrawMoney(1010,200);
-        assertEquals(300, account1.getBalance(), 0.01);
+        assertEquals(300, account1.getBalance(), 0.00);
+    }
+
+    @Test
+    public void testWithdrawAmountIsMoreThanBalance_throwException() {
+        account1.depositMoney(1010,500);
+        assertThrows(IllegalArgumentException.class, () -> account1.withdrawMoney(1010, 800));
+    }
+
+    @Test
+    public void testInvalidPinWhenWithdrawing_throwException() {
+        account1.depositMoney(1010,500);
+        assertThrows(IllegalArgumentException.class, () -> account1.withdrawMoney(1257, 200));
+    }
+
+    @Test
+    public void testWhenWithdrawingWhileAccountIsClose_throwException() {
+        account1.closeAccount();
+        assertThrows(IllegalArgumentException.class, () -> account1.withdrawMoney(1010, 300));
     }
 
     @Test
     public void testCheckAccountBalance() {
         account1.depositMoney(1010,200.6);
-        assertEquals(200.6, account1.getBalance(), 0.01);
-
+        assertEquals(200.6, account1.getBalance(), 0.00);
     }
 
     @Test
-    public void testTransferMoney() {
-        account1.depositMoney(1010,700);
-        account1.transferMoney(account2,200, 1010);
-        assertEquals(500, account1.getBalance(), 0.01);
-        assertEquals(200, account2.getBalance(), 0.01);
+    public void testTransferMoneyValid() {
+        account1.depositMoney(1010, 700);
+        account1.withdrawMoney(1010, 200);
+        account1.transferMoney(account2, 200, 1010);
+        assertEquals(300, account1.getBalance(), 0.00);
+        assertEquals(200, account2.getBalance(), 0.00);
     }
+
+    @Test
+    public void testInvalidPinWhenTransferingMoney_throwException() {
+        account1.depositMoney(1010,500);
+        assertThrows(IllegalArgumentException.class, () -> account1.transferMoney(account2, 1263, 200));
+    }
+
+    @Test
+    public void testTransferMoneyWhileAccountIsClose_throwException() {
+        account1.closeAccount();
+        assertThrows(IllegalArgumentException.class, () -> account1.transferMoney(account2, 1010, 300));
+    }
+
+
+    @Test
+    public void testTransferIsMoreThanBalance_throwException() {
+        account1.depositMoney(1010,500);
+        assertThrows(IllegalArgumentException.class, () -> account1.transferMoney(account2, 1010, 700));
+    }
+
 
     @Test
     public void testChangePin() {
