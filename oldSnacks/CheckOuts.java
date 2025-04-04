@@ -36,7 +36,7 @@ public class CheckOuts{
 	customerName = userInput.nextLine();
 	
 	while(!customerName.matches("[a-zA-Z\\s]+")){
-	System.out.print("Invalid name, try again: ");
+ 	System.out.print("Please enter a valid name using only letters and spaces: ");
 	customerName = userInput.nextLine();
 	}
 
@@ -45,7 +45,7 @@ public class CheckOuts{
 	goods = userInput.nextLine();
 	
 	while(!goods.matches("[a-zA-Z\\s]+")){
-  	System.out.print("Invalid name, try again: ");
+ 	System.out.print("Please enter a valid name using only letters and spaces: ");
 	goods = userInput.nextLine();
 	}goodsPurchase.add(goods);
 
@@ -115,8 +115,8 @@ public class CheckOuts{
 	userInput.next();
 	}
 	}
-	while(discount < 0) {
-        System.out.print("invalid, Try again: " );
+	while(discount < 0 || discount > 100) {
+        System.out.print("invalid, Try again(1 -> 100): " );
         discount = userInput.nextInt();
 	}
 
