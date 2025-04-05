@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 public class AtmMachineAppTest {
 
-    AtmMachineApp account1 = new AtmMachineApp("Nicholas", "Ichukwu", 1010);
-    AtmMachineApp account2 = new AtmMachineApp("John", "Adah", 1212);
+    AtmMachineApp account1 = new AtmMachineApp("1","Nicholas", "Ichukwu", 1010);
+    AtmMachineApp account2 = new AtmMachineApp("2","John", "Adah", 1212);
 
 
     @Test

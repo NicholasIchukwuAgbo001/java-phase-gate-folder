@@ -1,4 +1,3 @@
-
 class AtmMachineApp:
     def __init__(self, first_name, last_name, pin):
         self._first_name = first_name
