@@ -72,12 +72,13 @@ public class AtmMachineApp {
         if (this.pin == pin && !isClosed && this.balance >= amount) {
             this.withdrawMoney(pin, amount);
             account2.depositMoney(account2.getPin(), amount);
-        } else if (this.pin != pin) {
+        } else{
+            throw new IllegalArgumentException("Insufficient balance");
+        }
+        if (this.pin != pin) {
             throw new IllegalArgumentException("Invalid pin");
         } else if (isClosed) {
             throw new IllegalArgumentException("Account closed");
-        } else if (amount > this.balance) {
-            throw new IllegalArgumentException("Insufficient balance");
         }
     }
 

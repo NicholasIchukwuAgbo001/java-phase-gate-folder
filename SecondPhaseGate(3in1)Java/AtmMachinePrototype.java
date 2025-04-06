@@ -64,8 +64,7 @@ public class AtmMachinePrototype {
         }
 
 
-
-        String accountNumber = String.valueOf(accounts.size() + 1);
+        accountNumber = String.valueOf(accounts.size() + 1);
         AtmMachineApp account = new AtmMachineApp(accountNumber, firstName, lastName, pin);
         accounts.add(account);
 
@@ -77,7 +76,8 @@ public class AtmMachinePrototype {
 
     public void closeAccount() {
         System.out.print("\nEnter account number: ");
-        accountNumber = userInputCollection.nextLine();
+        accountNumber = userInputCollection.next();
+        userInputCollection.nextLine();
         while (true) {
             if (accountNumber.isEmpty()) {
                 System.out.print("\nInvalid account number. Please enter your account number: \n");
@@ -160,14 +160,15 @@ public class AtmMachinePrototype {
             try {
                 System.out.print("\nEnter amount to deposit: ");
                 amount = userInputCollection.nextDouble();
+                userInputCollection.nextLine();
                 if (amount <= 0) {
                     System.out.println("\nInvalid amount. Please enter a positive amount.\n");
-                }else {
+                } else {
                     break;
                 }
             } catch (InputMismatchException e) {
                 System.out.print("\nInvalid input, Please enter a valid amount.\n");
-                userInputCollection.next();
+                userInputCollection.nextLine();
             }
         }
 
@@ -186,7 +187,6 @@ public class AtmMachinePrototype {
     }
 
 
-
     public void withdraw() {
         System.out.print("\nEnter account number: ");
         accountNumber = userInputCollection.next();
@@ -195,9 +195,11 @@ public class AtmMachinePrototype {
             if (accountNumber.isEmpty()) {
                 System.out.print("\nInvalid account number. Please enter your account number: \n");
                 accountNumber = userInputCollection.next();
+                userInputCollection.nextLine();
             } else if (!accountNumber.matches("\\d+")) {
                 System.out.print("\nInvalid account number. Please enter number only: \n");
                 accountNumber = userInputCollection.next();
+                userInputCollection.nextLine();
             } else {
                 break;
             }
@@ -206,7 +208,8 @@ public class AtmMachinePrototype {
         while (true) {
             try {
                 System.out.print("\nEnter your PIN: ");
-                String userInput = userInputCollection.nextLine();
+                String userInput = userInputCollection.next();
+                userInputCollection.nextLine();
                 if (userInput.trim().isEmpty()) {
                     System.out.print("\nPIN cannot be empty. \n");
                     continue;
@@ -219,25 +222,35 @@ public class AtmMachinePrototype {
         }
 
 
-        while(true) {
+        while (true) {
             try {
                 System.out.print("\nEnter amount to withdraw: ");
                 amount = userInputCollection.nextDouble();
+                userInputCollection.nextLine();
                 break;
-            }catch(InputMismatchException e) {
+            } catch (InputMismatchException e) {
                 System.out.print("\nInvalid input, Please enter integer only.\n");
                 userInputCollection.next();
+                userInputCollection.nextLine();
             }
         }
 
         for (AtmMachineApp account : accounts) {
             if (account.getAccountNumber().equals(accountNumber)) {
-                account.withdrawMoney(pin, amount);
-                System.out.println("\nWithdraw successfully.");
+                if (account.getPin() == pin) {
+                    try {
+                        account.withdrawMoney(pin, amount);
+                        System.out.println("\nWithdraw successfully.");
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("\nInsuficient balance.\n");
+                    }
+                } else {
+                    System.out.println("\nInvalid PIN.");
+                }
                 return;
             }
         }
-        System.out.println("\ninvalid account number\n");
+        System.out.println("\nAccount not found.");
     }
 
     public void getBalance() {
@@ -282,16 +295,15 @@ public class AtmMachinePrototype {
     }
 
     public void changePin() {
-        System.out.print("Enter account number: ");
+        System.out.print("\nEnter account number: ");
         accountNumber = userInputCollection.next();
         userInputCollection.nextLine();
         while (true) {
             if (accountNumber.isEmpty()) {
                 System.out.print("\nInvalid account number. Please enter your account number: \n");
-                accountNumber = userInputCollection.next();
+                accountNumber = userInputCollection.nextLine();
             } else if (!accountNumber.matches("\\d+")) {
                 System.out.print("\nInvalid account number. Please enter number only: \n");
-                accountNumber = userInputCollection.next();
             } else {
                 break;
             }
@@ -331,12 +343,16 @@ public class AtmMachinePrototype {
 
         for (AtmMachineApp account : accounts) {
             if (account.getAccountNumber().equals(accountNumber)) {
-                account.changePin(oldPin, newPin);
-                System.out.println("PIN changed successfully.\n");
+                try {
+                    account.changePin(oldPin, newPin);
+                    System.out.println("PIN changed successfully.\n");
+                } catch (IllegalArgumentException e) {
+                    System.out.println("\nInvalid old PIN. Please try again.\n");
+                }
                 return;
             }
         }
-        System.out.println("invalid PIN. \n");
+        System.out.println("\nAccount Not Found. ");
     }
 
     public void transferMoney() {
@@ -346,10 +362,10 @@ public class AtmMachinePrototype {
         while (true) {
             if (accountNumber1.isEmpty()) {
                 System.out.print("\nInvalid account number. Please enter your account number: \n");
-                accountNumber1 = userInputCollection.next();
+                accountNumber1 = userInputCollection.nextLine();
             } else if (!accountNumber1.matches("\\d+")) {
                 System.out.print("\nInvalid account number. Please enter number only: \n");
-                accountNumber1 = userInputCollection.next();
+                accountNumber1 = userInputCollection.nextLine();
             } else {
                 break;
             }
@@ -362,9 +378,11 @@ public class AtmMachinePrototype {
             if (accountNumber2.isEmpty()) {
                 System.out.print("\nInvalid account number. Please enter your account number: \n");
                 accountNumber2 = userInputCollection.next();
+                userInputCollection.nextLine();
             } else if (!accountNumber2.matches("\\d+")) {
                 System.out.print("\nInvalid account number. Please enter number only: \n");
                 accountNumber2 = userInputCollection.next();
+                userInputCollection.nextLine();
             } else {
                 break;
             }
@@ -377,12 +395,12 @@ public class AtmMachinePrototype {
                 userInputCollection.nextLine();
                 if (amount <= 0) {
                     System.out.println("\nInvalid amount. Please enter a positive amount.\n");
-                }else {
+                } else {
                     break;
                 }
             } catch (InputMismatchException e) {
                 System.out.print("\nInvalid input, Please enter a valid amount.\n");
-                userInputCollection.next();
+                userInputCollection.nextLine();
             }
         }
 
@@ -415,13 +433,19 @@ public class AtmMachinePrototype {
             }
         }
         if (account1 != null && account2 != null) {
-            account1.transferMoney(account2, amount, pin);
+            try {
+                account1.transferMoney(account2, amount, pin);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Insufficient Balance");
+            }
         } else {
-            System.out.println("account not found\n");
+            System.out.println("Account not found");
         }
     }
 
-    public static void main(String[] args) {
+
+
+        public static void main(String[] args) {
         AtmMachinePrototype option = new AtmMachinePrototype();
         Scanner input = new Scanner(System.in);
         int choice;
@@ -442,10 +466,11 @@ public class AtmMachinePrototype {
                 try {
                     System.out.print("\nEnter your choice: ");
                     choice = input.nextInt();
+                    input.nextLine();
                     break;
                 }catch (InputMismatchException e) {
                     System.out.print("Invalid input, Please enter a valid choice,");
-                    input.next();
+                    input.nextLine();
                 }
             }
 
