@@ -1,234 +1,105 @@
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.InputMismatchException;
 
 public class AtmMachinePrototype {
     private final ArrayList<AtmMachineApp> accounts;
-    private final Scanner userInputCollection;
-    int pin;
-    double amount;
-    String accountNumber;
-    String firstName;
-    String lastName;
-    int oldPin;
-    int newPin;
-    String accountNumber1;
-    String accountNumber2;
 
     public AtmMachinePrototype() {
         this.accounts = new ArrayList<>();
-        this.userInputCollection = new Scanner(System.in);
     }
 
-    private String getAccountNumber() {
-        while (true) {
-            System.out.print("\nEnter account number: ");
-            String accountNumber = userInputCollection.next();
-            userInputCollection.nextLine();
-            if (accountNumber != null && !accountNumber.isEmpty() && accountNumber.matches("\\d+")) {
-                return accountNumber;
-            } else {
-                System.out.print("\nInvalid account number. Please enter your account number: \n");
-            }
+
+    public String getAccountNumber(String accountNumber) {
+        if (accountNumber != null && !accountNumber.isEmpty() && accountNumber.matches("\\d+")) {
+            return accountNumber;
+        } else {
+            throw new IllegalArgumentException("Invalid account number");
         }
     }
 
-    private int getPin(String display) {
-        while (true) {
-            try {
-                System.out.print(display);
-                String userInput = userInputCollection.nextLine();
-                if (userInput != null && !userInput.trim().isEmpty()) {
-                    if (userInput.length() != 4 || !userInput.matches("\\d+")) {
-                        System.out.print("\nInvalid PIN. Please enter a 4-digit PIN: \n");
-                    } else {
-                        return Integer.parseInt(userInput);
-                    }
-                } else {
-                    System.out.print("PIN cannot be empty. ");
-                }
-            } catch (NumberFormatException e) {
-                System.out.print("\nPlease enter number only,\n");
-            }
+   public void getPin(int pin) {
+        String pin2 = String.valueOf(pin);
+        if (pin2.length() == 4 && pin2.matches("\\d+")) {
+
+        } else {
+            throw new IllegalArgumentException("Invalid PIN. PIN must be a 4-digit number");
         }
     }
 
-    private double getAmount() {
-        while (true) {
-            try {
-                System.out.print("\nEnter amount: ");
-                double amount = userInputCollection.nextDouble();
-                userInputCollection.nextLine();
-                if (amount > 0) {
-                    return amount;
-                } else {
-                    System.out.println("\nInvalid amount. Please enter a positive amount.\n");
-                }
-            } catch (InputMismatchException e) {
-                System.out.print("\nInvalid input, Please enter a valid amount.\n");
-                userInputCollection.nextLine();
-            }
+    public double getAmount(double amount) {
+        if (amount > 0) {
+            return amount;
+        } else {
+            throw new IllegalArgumentException("Invalid amount. Amount must be a positive number");
         }
     }
 
 
-
-    public void createAccount() {
-
-        while (true) {
-            System.out.print("\nEnter your first name: ");
-            firstName = userInputCollection.nextLine();
-            if (!firstName.isEmpty() && firstName.matches("[a-zA-Z\\s]+")) {
-                break;
-            } else {
-                System.out.print("\nPlease enter a valid name using only letters and spaces: \n");
-            }
+    public void createAccount(String firstName, String lastName, int pin) {
+        if (!firstName.isEmpty() && firstName.matches("[a-zA-Z\\s]+") && !lastName.isEmpty() && lastName.matches("[a-zA-Z\\s]+")) {
+            String accountNumber = String.valueOf(accounts.size() + 1);
+            AtmMachineApp account = new AtmMachineApp(accountNumber, firstName, lastName, pin);
+            accounts.add(account);
+        } else {
+            throw new IllegalArgumentException("Invalid input");
         }
-
-
-        while (true) {
-            System.out.print("\nEnter your last name: ");
-            lastName = userInputCollection.nextLine();
-            if (!lastName.isEmpty() && lastName.matches("[a-zA-Z\\s]+")) {
-                break;
-            } else {
-                System.out.print("\nPlease enter a valid name using only letters and spaces: \n");
-            }
-        }
-
-        while (true) {
-            try {
-                System.out.print("\nEnter your PIN: ");
-                String userInput = userInputCollection.nextLine();
-                if (userInput.trim().isEmpty()) {
-                    System.out.print("PIN cannot be empty. ");
-                    continue;
-                }
-                if (userInput.length() != 4 || !userInput.matches("\\d+")) {
-                    System.out.print("\nInvalid PIN. Please enter a 4-digit PIN: \n");
-                } else {
-                    pin = Integer.parseInt(userInput);
-                    break;
-                }
-            } catch (NumberFormatException e) {
-                System.out.print("\nPlease enter number only,\n");
-            }
-        }
-
-
-        accountNumber = String.valueOf(accounts.size() + 1);
-        AtmMachineApp account = new AtmMachineApp(accountNumber, firstName, lastName, pin);
-        accounts.add(account);
-
-        System.out.println("\nAccount created successfully.");
-        System.out.println("First Name: " + firstName);
-        System.out.println("Last Name: " + lastName);
-        System.out.println("Account Number: " + accountNumber);
     }
 
-    public void closeAccount() {
-        accountNumber = getAccountNumber();
-        pin = getPin("\nEnter your PIN: ");
+    public int getAccountNumber(){
+        return accounts.size();
+    }
 
+    public void closeAccount(String accountNumber, int pin) {
         for (AtmMachineApp account : accounts) {
-            if (account.getAccountNumber().equals(accountNumber)) {
-                if (account.getPin() == pin) {
-                    accounts.remove(account);
-                    System.out.println("\nAccount closed successfully.\n");
-                } else {
-                    System.out.println("\nInvalid PIN.\n");
-                }
+            if (account.getAccountNumber().equals(accountNumber) && account.getPin() == pin) {
+                accounts.remove(account);
                 return;
             }
         }
-        System.out.println("\nAccount not found.\n");
+        throw new IllegalArgumentException("Account not found or invalid PIN");
     }
 
-
-    public void deposit() {
-        accountNumber = getAccountNumber();
-        pin = getPin("\nEnter your PIN: ");
-        amount = getAmount();
-
+    public void deposit(String accountNumber, int pin, double amount) {
         for (AtmMachineApp account : accounts) {
-            if (account.getAccountNumber().equals(accountNumber)) {
-                if (account.getPin() == pin) {
-                    account.depositMoney(pin, amount);
-                    System.out.println("\nDeposited successfully.\n");
-                } else {
-                    System.out.println("\nInvalid PIN.\n");
-                }
+            if (account.getAccountNumber().equals(accountNumber) && account.getPin() == pin) {
+                account.depositMoney(pin, amount);
                 return;
             }
         }
-        System.out.println("\nInvalid account number\n");
+        throw new IllegalArgumentException("Account not found or invalid PIN");
     }
 
-
-    public void withdraw() {
-        accountNumber = getAccountNumber();
-        pin = getPin("\nEnter your PIN: ");
-        amount = getAmount();
-
+    public void withdraw(String accountNumber, int pin, double amount) {
         for (AtmMachineApp account : accounts) {
-            if (account.getAccountNumber().equals(accountNumber)) {
-                if (account.getPin() == pin) {
-                    try {
-                        account.withdrawMoney(pin, amount);
-                        System.out.println("\nWithdraw successfully.");
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("\nInsuficient balance.\n");
-                    }
-                } else {
-                    System.out.println("\nInvalid PIN.");
-                }
+            if (account.getAccountNumber().equals(accountNumber) && account.getPin() == pin) {
+                account.withdrawMoney(pin, amount);
                 return;
             }
         }
-        System.out.println("\nAccount not found.");
+        throw new IllegalArgumentException("Account not found or invalid PIN");
     }
 
-    public void getBalance() {
-        accountNumber = getAccountNumber();
-        pin = getPin("\nEnter your PIN: ");
-
+    public double getBalance(String accountNumber, int pin) {
         for (AtmMachineApp account : accounts) {
-            if (account.getAccountNumber().equals(accountNumber)) {
-                System.out.println("\nBalance: " + account.getBalance());
+            if (account.getAccountNumber().equals(accountNumber) && account.getPin() == pin) {
+                return account.getBalance();
+            }
+        }
+        throw new IllegalArgumentException("Account not found or invalid PIN");
+    }
+
+    public void changePin(String accountNumber, int oldPin, int newPin) {
+        for (AtmMachineApp account : accounts) {
+            if (account.getAccountNumber().equals(accountNumber) && account.getPin() == oldPin) {
+                account.changePin(oldPin, newPin);
                 return;
             }
         }
-        System.out.println("invalid account number\n");
+        throw new IllegalArgumentException("Account not found or invalid old PIN");
     }
 
-    public void changePin() {
-        accountNumber = getAccountNumber();
-        oldPin = getPin("\nEnter your old PIN: ");
-        newPin = getPin("\nEnter your new PIN: ");
-
-        for (AtmMachineApp account : accounts) {
-            if (account.getAccountNumber().equals(accountNumber)) {
-                try {
-                    account.changePin(oldPin, newPin);
-                    System.out.println("PIN changed successfully.\n");
-                } catch (IllegalArgumentException e) {
-                    System.out.println("\nInvalid old PIN. Please try again.\n");
-                }
-                return;
-            }
-        }
-        System.out.println("\nAccount Not Found. ");
-    }
-
-    public void transferMoney() {
-        accountNumber1 = getAccountNumber();
-        accountNumber2 = getAccountNumber();
-        amount = getAmount();
-        pin = getPin("\nEnter your PIN: ");
-
+    public void transferMoney(String accountNumber1, String accountNumber2, int pin, double amount) {
         AtmMachineApp account1 = null;
         AtmMachineApp account2 = null;
-
         for (AtmMachineApp account : accounts) {
             if (account.getAccountNumber().equals(accountNumber1)) {
                 account1 = account;
@@ -238,86 +109,17 @@ public class AtmMachinePrototype {
         }
         if (account1 != null && account2 != null && !account1.getAccountNumber().equals(account2.getAccountNumber())) {
             if (account1.getPin() == pin) {
-                try {
+                if (account1.getBalance() >= amount) {
                     account1.transferMoney(account2, amount, pin);
-                    System.out.println("Transfer successful\n");
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Insufficient Balance");
+                } else {
+                    throw new IllegalArgumentException("Insufficient balance");
                 }
             } else {
-                System.out.println("Invalid PIN");
+                throw new IllegalArgumentException("Invalid PIN");
             }
-        } else if (account1 != null && account2 != null && account1.getAccountNumber().equals(account2.getAccountNumber())) {
-            System.out.println("Cannot transfer money to the same account");
         } else {
-            System.out.println("Account not found");
+            throw new IllegalArgumentException("Account not found");
         }
-    }
-
-
-
-    public static void main(String[] args) {
-        AtmMachinePrototype option = new AtmMachinePrototype();
-        Scanner input = new Scanner(System.in);
-        int choice;
-
-        System.out.println("\nWELCOME TO BANKE BANK 🤝");
-
-        while (true) {
-            System.out.println("\n1. Create Account");
-            System.out.println("2. Close Account");
-            System.out.println("3. Deposit Money");
-            System.out.println("4. Withdraw Money");
-            System.out.println("5. Check balance");
-            System.out.println("6. Change PIN");
-            System.out.println("7. Transfer Money");
-            System.out.println("8. Exit");
-
-            while(true) {
-                try {
-                    System.out.print("\nEnter your choice: ");
-                    choice = input.nextInt();
-                    input.nextLine();
-                    break;
-                }catch (InputMismatchException e) {
-                    System.out.print("Invalid input, Please enter a valid choice,");
-                    input.nextLine();
-                }
-            }
-
-            switch (choice) {
-                case 1:
-                    option.createAccount();
-                    break;
-                case 2:
-                    option.closeAccount();
-                    break;
-                case 3:
-                    option.deposit();
-                    break;
-                case 4:
-                    option.withdraw();
-                    break;
-                case 5:
-                    option.getBalance();
-                    break;
-                case 6:
-                    option.changePin();
-                    break;
-                case 7:
-                    option.transferMoney();
-                    break;
-                case 8:
-                    System.out.println("Thanks you for banking with us(BANKE BANK)🤗...");
-                    return;
-                default:
-                    System.out.println("Invalid choice. Please choose a valid option.");
-            }
-
-        }
-
     }
 
 }
-
-

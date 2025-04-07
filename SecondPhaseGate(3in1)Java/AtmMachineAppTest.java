@@ -2,6 +2,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+
 public class AtmMachineAppTest {
 
     AtmMachineApp account1 = new AtmMachineApp("1","Nicholas", "Ichukwu", 1010);
@@ -9,8 +10,13 @@ public class AtmMachineAppTest {
 
 
     @Test
-    public void testAtmMachineAppIsCreated() {
+    public void testAtmMachineAppIsCreated1() {
         assertNotNull(account1);
+    }
+
+    @Test
+    public void testAtmMachineAppIsCreated2() {
+        assertNotNull(account2);
     }
 
     @Test
