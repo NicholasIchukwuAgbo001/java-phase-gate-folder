@@ -332,7 +332,7 @@ public static void main(String[] args) {
                     try {
                         System.out.print("\nEnter your account: ");
                         accountNumber1 = userInputCollection.nextLine();
-                        option.getAccountNumber1(accountNumber1); // Validate the account number
+                        option.getAccountNumber1(accountNumber1);
                         break;
                     } catch (IllegalArgumentException e) {
                         System.out.println("\n" + e.getMessage());
@@ -346,7 +346,7 @@ public static void main(String[] args) {
                         if (accountNumber2.equals(accountNumber1)) {
                             throw new IllegalArgumentException("Cannot transfer to the same account.");
                         }
-                        option.getAccountNumber1(accountNumber2); // Validate the account number
+                        option.getAccountNumber1(accountNumber2);
                         break;
                     } catch (IllegalArgumentException e) {
                         System.out.println("\n" + e.getMessage());
@@ -358,7 +358,7 @@ public static void main(String[] args) {
                         System.out.print("\nEnter the amount to transfer: ");
                         amount = userInputCollection.nextDouble();
                         userInputCollection.nextLine();
-                        option.getAmount(amount); // Validate the amount
+                        option.getAmount(amount);
                         break;
                     } catch (IllegalArgumentException e) {
                         System.out.println("\n" + e.getMessage());
