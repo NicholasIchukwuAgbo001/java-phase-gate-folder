@@ -1,19 +1,19 @@
 public class AtmMachineApp {
-    private final String accountNumber;
     private final String firstName;
     private final String lastName;
     private int pin;
     private double balance;
     private Boolean isClosed;
+    private final String accountNumber;
 
 
     public AtmMachineApp(String accountNumber, String firstName, String lastName, int pin) {
-        this.accountNumber = accountNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.pin = pin;
         this.balance = 0;
         this.isClosed = false;
+        this.accountNumber = accountNumber;
     }
 
 
@@ -29,16 +29,12 @@ public class AtmMachineApp {
         return pin;
     }
 
-    public void setPin(int newPin) {
-        this.pin = newPin;
-    }
-
     public double getBalance() {
         return balance;
     }
 
     public Boolean isClosed() {
-        return isClosed;
+        return this.isClosed;
     }
 
     public void closeAccount() {

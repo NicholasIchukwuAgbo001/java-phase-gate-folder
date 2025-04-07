@@ -32,12 +32,15 @@ public static void main(String[] args) {
         while (true) {
             try {
                 System.out.print("\nEnter your choice: ");
-                choice = userInputCollection.nextInt();
-                userInputCollection.nextLine();
+                String input = userInputCollection.nextLine();
+                if (input.isEmpty()) {
+                    System.out.print("Invalid input, Please enter a valid choice,");
+                    continue;
+                }
+                choice = Integer.parseInt(input);
                 break;
-            } catch (InputMismatchException e) {
-                System.out.print("Invalid userInputCollection, Please enter a valid choice,");
-                userInputCollection.nextLine();
+            } catch (Exception e) {
+                System.out.print("Invalid input, Please enter a valid choice,");
             }
         }
 
@@ -93,13 +96,14 @@ public static void main(String[] args) {
                 } catch (IllegalArgumentException e) {
                     System.out.println("\n" + e.getMessage());
                 }
+
                 break;
             case 2:
                 while (true) {
                     try {
                         System.out.print("\nEnter your account number: ");
                         accountNumber = userInputCollection.nextLine();
-                        option.getAccountNumber(accountNumber);
+                        option.getAccountNumber1(accountNumber);
                         break;
                     }catch (IllegalArgumentException e) {
                     System.out.println("\n" + e.getMessage());}
@@ -131,7 +135,7 @@ public static void main(String[] args) {
                     try {
                         System.out.print("\nEnter your account number: ");
                         accountNumber = userInputCollection.nextLine();
-                        option.getAccountNumber(accountNumber);
+                        option.getAccountNumber1(accountNumber);
                         break;
                     } catch (IllegalArgumentException e) {
                         System.out.println("\n" + e.getMessage());
@@ -178,7 +182,7 @@ public static void main(String[] args) {
                     try {
                         System.out.print("\nEnter your account number: ");
                         accountNumber = userInputCollection.nextLine();
-                        option.getAccountNumber(accountNumber);
+                        option.getAccountNumber1(accountNumber);
                         break;
                     } catch (IllegalArgumentException e) {
                         System.out.println("\n" + e.getMessage());
@@ -220,7 +224,7 @@ public static void main(String[] args) {
                     try {
                         System.out.print("\nEnter your account number: ");
                         accountNumber = userInputCollection.nextLine();
-                        option.getAccountNumber(accountNumber);
+                        option.getAccountNumber1(accountNumber);
                         break;
                     } catch (IllegalArgumentException e) {
                         System.out.println("\n" + e.getMessage());
@@ -251,7 +255,7 @@ public static void main(String[] args) {
                     try {
                         System.out.print("\nEnter your account number: ");
                         accountNumber = userInputCollection.nextLine();
-                        option.getAccountNumber(accountNumber);
+                        option.getAccountNumber1(accountNumber);
                         break;
                     } catch (IllegalArgumentException e) {
                         System.out.println("\n" + e.getMessage());
@@ -298,7 +302,7 @@ public static void main(String[] args) {
                     try {
                         System.out.print("\nEnter your account: ");
                         accountNumber1 = userInputCollection.nextLine();
-                        option.getAccountNumber(accountNumber1); // Validate the account number
+                        option.getAccountNumber1(accountNumber1); // Validate the account number
                         break;
                     } catch (IllegalArgumentException e) {
                         System.out.println("\n" + e.getMessage());
@@ -312,7 +316,7 @@ public static void main(String[] args) {
                         if (accountNumber2.equals(accountNumber1)) {
                             throw new IllegalArgumentException("Cannot transfer to the same account.");
                         }
-                        option.getAccountNumber(accountNumber2); // Validate the account number
+                        option.getAccountNumber1(accountNumber2); // Validate the account number
                         break;
                     } catch (IllegalArgumentException e) {
                         System.out.println("\n" + e.getMessage());

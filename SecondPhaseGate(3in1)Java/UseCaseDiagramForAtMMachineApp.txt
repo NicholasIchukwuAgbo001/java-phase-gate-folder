@@ -1,0 +1,18 @@
+========================
+    Use Case Diagram.
+======================
+    Customer...
+    1 -->|Create Account
+    2 -->|Close Account
+    3 -->|Deposit Money
+    4 -->|Withdraw Money
+    5 -->|Check Balance
+    6 -->|Change PIN
+    7 -->|Transfer Money
+    
+    Bank...
+    1 -->|Verify PIN
+    2 -->|Update Account Balance
+    3 -->|Retrieve Account Balance
+    4 -->|Update PIN
+    5 -->|Process Transaction

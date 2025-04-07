@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class AtmMachinePrototype {
     private final ArrayList<AtmMachineApp> accounts;
@@ -8,7 +9,7 @@ public class AtmMachinePrototype {
     }
 
 
-    public String getAccountNumber(String accountNumber) {
+    public String getAccountNumber1(String accountNumber) {
         if (accountNumber != null && !accountNumber.isEmpty() && accountNumber.matches("\\d+")) {
             return accountNumber;
         } else {
@@ -35,18 +36,21 @@ public class AtmMachinePrototype {
 
 
     public void createAccount(String firstName, String lastName, int pin) {
-        if (!firstName.isEmpty() && firstName.matches("[a-zA-Z\\s]+") && !lastName.isEmpty() && lastName.matches("[a-zA-Z\\s]+")) {
-            String accountNumber = String.valueOf(accounts.size() + 1);
+        if (firstName.matches("[a-zA-Z\\s]+") && lastName.matches("[a-zA-Z\\s]+") && !lastName.isEmpty() && firstName.length() >= 3  && lastName.length() >= 3) {
+            Random random = new Random();
+            String accountNumber = String.format("%010d", random.nextInt(1000000000));
             AtmMachineApp account = new AtmMachineApp(accountNumber, firstName, lastName, pin);
             accounts.add(account);
         } else {
-            throw new IllegalArgumentException("Invalid input");
+            throw new IllegalArgumentException("Invalid input, Name Must be at least 3 characters");
         }
     }
 
-    public int getAccountNumber(){
-        return accounts.size();
+
+    public String getAccountNumber(){
+        return accounts.getLast().getAccountNumber();
     }
+
 
     public void closeAccount(String accountNumber, int pin) {
         for (AtmMachineApp account : accounts) {
@@ -88,6 +92,9 @@ public class AtmMachinePrototype {
     }
 
     public void changePin(String accountNumber, int oldPin, int newPin) {
+        if (oldPin == newPin) {
+            throw new IllegalArgumentException("New PIN cannot be the same as the old PIN.");
+        }
         for (AtmMachineApp account : accounts) {
             if (account.getAccountNumber().equals(accountNumber) && account.getPin() == oldPin) {
                 account.changePin(oldPin, newPin);
@@ -121,5 +128,4 @@ public class AtmMachinePrototype {
             throw new IllegalArgumentException("Account not found");
         }
     }
-
 }
