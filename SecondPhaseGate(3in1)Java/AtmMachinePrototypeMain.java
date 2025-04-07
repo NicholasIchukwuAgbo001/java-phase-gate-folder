@@ -9,7 +9,8 @@ public static void main(String[] args) {
     int choice;
     String firstName;
     String lastName;
-    int pin;
+    int pin = 0;
+    int confirmPin;
     String accountNumber;
     double amount;
     int newPin;
@@ -81,7 +82,14 @@ public static void main(String[] args) {
                         String pinStr = userInputCollection.nextLine();
                         pin = Integer.parseInt(pinStr);
                         option.getPin(pin);
-                        break;
+                        System.out.print("\nConfirm your PIN: ");
+                        String confirmPinStr = userInputCollection.nextLine();
+                        confirmPin = Integer.parseInt(confirmPinStr);
+                        if (confirmPin != pin) {
+                            System.out.println("\nPIN do not match. Please try again.");
+                        } else {
+                            break;
+                        }
                     } catch (Exception e) {
                         System.out.println("\nInvalid input. Please enter a valid PIN.");
                     }
@@ -115,7 +123,14 @@ public static void main(String[] args) {
                         String pinStr = userInputCollection.nextLine();
                         pin = Integer.parseInt(pinStr);
                         option.getPin(pin);
-                        break;
+                        System.out.print("\nConfirm your PIN: ");
+                        String confirmPinStr = userInputCollection.nextLine();
+                        confirmPin = Integer.parseInt(confirmPinStr);
+                        if (confirmPin != pin) {
+                            System.out.println("\nPIN do not match. Please try again.");
+                        } else {
+                            break;
+                        }
                     } catch (Exception e) {
                         System.out.println("\nInvalid input. Please enter a valid PIN.");
                     }
@@ -142,18 +157,6 @@ public static void main(String[] args) {
                     }
                 }
 
-                while (true) {
-                    try {
-                        System.out.print("\nEnter your PIN: ");
-                        String pinStr = userInputCollection.nextLine();
-                        pin = Integer.parseInt(pinStr);
-                        option.getPin(pin);
-                        break;
-                    } catch (Exception e) {
-                        System.out.println("\nInvalid input. Please enter a valid PIN.");
-                    }
-                }
-
 
                 while (true) {
                     try {
@@ -167,6 +170,25 @@ public static void main(String[] args) {
                     } catch (InputMismatchException e) {
                         System.out.println("\nInvalid userInputCollection. Please enter a valid amount.");
                         userInputCollection.nextLine();
+                    }
+                }
+
+                while (true) {
+                    try {
+                        System.out.print("\nEnter your PIN: ");
+                        String pinStr = userInputCollection.nextLine();
+                        pin = Integer.parseInt(pinStr);
+                        option.getPin(pin);
+                        System.out.print("\nConfirm your PIN: ");
+                        String confirmPinStr = userInputCollection.nextLine();
+                        confirmPin = Integer.parseInt(confirmPinStr);
+                        if (confirmPin != pin) {
+                            System.out.println("\nPIN do not match. Please try again.");
+                        } else {
+                            break;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("\nInvalid input. Please enter a valid PIN.");
                     }
                 }
 
@@ -189,17 +211,6 @@ public static void main(String[] args) {
                     }
                 }
 
-                while (true) {
-                    try {
-                        System.out.print("\nEnter your PIN: ");
-                        String pinStr = userInputCollection.nextLine();
-                        pin = Integer.parseInt(pinStr);
-                        option.getPin(pin);
-                        break;
-                    } catch (Exception e) {
-                        System.out.println("\nInvalid input. Please enter a valid PIN.");
-                    }
-                }
 
                 while(true) {
                     try {
@@ -210,6 +221,25 @@ public static void main(String[] args) {
                         break;
                     }catch (IllegalArgumentException e) {
                     System.out.println("\n" + e.getMessage());}
+                }
+
+                while (true) {
+                    try {
+                        System.out.print("\nEnter your PIN: ");
+                        String pinStr = userInputCollection.nextLine();
+                        pin = Integer.parseInt(pinStr);
+                        option.getPin(pin);
+                        System.out.print("\nConfirm your PIN: ");
+                        String confirmPinStr = userInputCollection.nextLine();
+                        confirmPin = Integer.parseInt(confirmPinStr);
+                        if (confirmPin != pin) {
+                            System.out.println("\nPIN do not match. Please try again.");
+                        } else {
+                            break;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("\nInvalid input. Please enter a valid PIN.");
+                    }
                 }
 
                 try {
@@ -325,18 +355,6 @@ public static void main(String[] args) {
 
                 while (true) {
                     try {
-                        System.out.print("\nEnter your PIN: ");
-                        String pinStr = userInputCollection.nextLine();
-                        pin = Integer.parseInt(pinStr);
-                        option.getPin(pin);
-                        break;
-                    } catch (Exception e) {
-                        System.out.println("\nInvalid input. Please enter a valid PIN.");
-                    }
-                }
-
-                while (true) {
-                    try {
                         System.out.print("\nEnter the amount to transfer: ");
                         amount = userInputCollection.nextDouble();
                         userInputCollection.nextLine();
@@ -349,6 +367,26 @@ public static void main(String[] args) {
                         userInputCollection.nextLine();
                     }
                 }
+
+                while (true) {
+                    try {
+                        System.out.print("\nEnter your PIN: ");
+                        String pinStr = userInputCollection.nextLine();
+                        pin = Integer.parseInt(pinStr);
+                        option.getPin(pin);
+                        System.out.print("\nConfirm your PIN: ");
+                        String confirmPinStr = userInputCollection.nextLine();
+                        confirmPin = Integer.parseInt(confirmPinStr);
+                        if (confirmPin != pin) {
+                            System.out.println("\nPIN do not match. Please try again.");
+                        } else {
+                            break;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("\nInvalid input. Please enter a valid PIN.");
+                    }
+                }
+
 
                 try {
                     option.transferMoney(accountNumber1, accountNumber2, pin, amount);
