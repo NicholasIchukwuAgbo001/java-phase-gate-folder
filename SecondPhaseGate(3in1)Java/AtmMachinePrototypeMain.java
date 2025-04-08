@@ -377,7 +377,7 @@ public static void main(String[] args) {
 
                 try {
                     option.transferMoney(accountNumber1, accountNumber2, pin, amount);
-                    System.out.println("\nTransfer successful.");
+                    System.out.println("\nTransfer of ₦" + amount + " was successful.");
                 } catch (IllegalArgumentException e) {
                     System.out.println("\n" + e.getMessage());
                 }
