@@ -8,6 +8,22 @@ public class AtmMachinePrototype {
         this.accounts = new ArrayList<>();
     }
 
+    public void getName(String name) {
+        if (name.length() < 3) {
+            throw new IllegalArgumentException("Invalid name, Name must contain only letters, spaces and at least 3 characters above.");
+        }
+        if (!name.matches("[a-zA-Z\\s]+")) {
+            throw new IllegalArgumentException("Invalid name, Name must contain only letters, spaces and at least 3 characters above.");
+        }
+    }
+
+    public void getPin(int pin) {
+        String pin2 = String.valueOf(pin);
+        if (pin2.length() == 4 && pin2.matches("\\d+")) {
+        } else {
+            throw new IllegalArgumentException("Invalid PIN. PIN must be a 4-digit number");
+        }
+    }
 
     public String getAccountNumber1(String accountNumber) {
         if (accountNumber != null && !accountNumber.isEmpty() && accountNumber.matches("\\d+")) {
@@ -17,16 +33,14 @@ public class AtmMachinePrototype {
         }
     }
 
-   public void getPin(int pin) {
-        String pin2 = String.valueOf(pin);
-        if (pin2.length() == 4 && pin2.matches("\\d+")) {
-
-        } else {
-            throw new IllegalArgumentException("Invalid PIN. PIN must be a 4-digit number");
-        }
+    public String getAccountNumber2(){
+        return accounts.getLast().getAccountNumber();
     }
 
     public double getAmount(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Invalid amount");
+        }
         if (amount > 0) {
             return amount;
         } else {
@@ -47,10 +61,6 @@ public class AtmMachinePrototype {
     }
 
 
-    public String getAccountNumber(){
-        return accounts.getLast().getAccountNumber();
-    }
-
 
     public void closeAccount(String accountNumber, int pin) {
         for (AtmMachineApp account : accounts) {
@@ -58,34 +68,71 @@ public class AtmMachinePrototype {
                 accounts.remove(account);
                 return;
             }
+
+            if(account.getPin() != pin) {
+                throw new IllegalArgumentException("Invalid pin");
+            }
+
         }
-        throw new IllegalArgumentException("Account not found or invalid PIN");
+        throw new IllegalArgumentException("Account not found");
     }
 
     public void deposit(String accountNumber, int pin, double amount) {
+
+        if(amount < 0){
+            throw new IllegalArgumentException("Invalid amount");
+        }
         for (AtmMachineApp account : accounts) {
             if (account.getAccountNumber().equals(accountNumber) && account.getPin() == pin) {
                 account.depositMoney(pin, amount);
                 return;
             }
+            if(!account.getAccountNumber().equals(accountNumber)) {
+                throw new IllegalArgumentException("Account number not found");
+            }
+
+            if(account.getPin() == pin){
+                throw new IllegalArgumentException("Invalid PIN");
+            }
         }
         throw new IllegalArgumentException("Account not found or invalid PIN");
     }
 
+
     public void withdraw(String accountNumber, int pin, double amount) {
+
+        if(amount < 0) {
+            throw new IllegalArgumentException("Invalid amount");
+        }
+
         for (AtmMachineApp account : accounts) {
             if (account.getAccountNumber().equals(accountNumber) && account.getPin() == pin) {
                 account.withdrawMoney(pin, amount);
                 return;
             }
+            if(!account.getAccountNumber().equals(accountNumber)) {
+                throw new IllegalArgumentException("Account number not found");
+            }
+
+            if(account.getPin() != pin) {
+                throw new IllegalArgumentException("Invalid PIN, try again");
+            }
         }
-        throw new IllegalArgumentException("Account not found or invalid PIN");
+        throw new IllegalArgumentException("Something went wrong, check your Account or PIN");
     }
 
     public double getBalance(String accountNumber, int pin) {
         for (AtmMachineApp account : accounts) {
             if (account.getAccountNumber().equals(accountNumber) && account.getPin() == pin) {
                 return account.getBalance();
+            }
+
+            if(!account.getAccountNumber().equals(accountNumber)) {
+                throw new IllegalArgumentException("Account number not found");
+            }
+
+            if(account.getPin() != pin) {
+                throw new IllegalArgumentException("Invalid PIN, try again");
             }
         }
         throw new IllegalArgumentException("Account not found or invalid PIN");
@@ -100,8 +147,11 @@ public class AtmMachinePrototype {
                 account.changePin(oldPin, newPin);
                 return;
             }
+            if(!account.getAccountNumber().equals(accountNumber)){
+                throw new IllegalArgumentException("Account number does not match old PIN");
+            }
         }
-        throw new IllegalArgumentException("Account not found or invalid old PIN");
+        throw new IllegalArgumentException("Something went wrong, check your Account number or PIN");
     }
 
     public void transferMoney(String accountNumber1, String accountNumber2, int pin, double amount) {

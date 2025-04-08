@@ -53,11 +53,9 @@ public static void main(String[] args) {
                     try {
                         System.out.print("\nEnter your first name: ");
                         firstName = userInputCollection.nextLine();
-                        if (!firstName.matches("[a-zA-Z\\s]+")) {
-                            throw new IllegalArgumentException("Invalid first name. Please enter a name containing only letters and spaces.");
-                        }
+                        option.getName(firstName);
                         break;
-                    } catch (IllegalArgumentException e) {
+                    } catch (Exception e) {
                         System.out.println("\n" + e.getMessage());
                     }
                 }
@@ -67,11 +65,9 @@ public static void main(String[] args) {
                     try {
                         System.out.print("\nEnter your last name: ");
                         lastName = userInputCollection.nextLine();
-                        if (!lastName.matches("[a-zA-Z\\s]+")) {
-                            throw new IllegalArgumentException("Invalid last name. Please enter a name containing only letters and spaces.");
-                        }
+                        option.getName(lastName);
                         break;
-                    } catch (IllegalArgumentException e) {
+                    } catch (Exception e) {
                         System.out.println("\n" + e.getMessage());
                     }
                 }
@@ -91,7 +87,7 @@ public static void main(String[] args) {
                             break;
                         }
                     } catch (Exception e) {
-                        System.out.println("\nInvalid input. Please enter a valid PIN.");
+                        System.out.println("Invalid PIN. PIN must be a 4-digit number");
                     }
                 }
 
@@ -99,7 +95,7 @@ public static void main(String[] args) {
                 try {
                     option.createAccount(firstName, lastName, pin);
                     System.out.println("\nAccount created successfully.");
-                    System.out.println("Your account number is: " + option.getAccountNumber());
+                    System.out.println("Your account number is: " + option.getAccountNumber2());
                     break;
                 } catch (IllegalArgumentException e) {
                     System.out.println("\n" + e.getMessage());
@@ -114,7 +110,7 @@ public static void main(String[] args) {
                         option.getAccountNumber1(accountNumber);
                         break;
                     }catch (IllegalArgumentException e) {
-                    System.out.println("\n" + e.getMessage());}
+                        System.out.println("\n" + e.getMessage());}
                 }
 
                 while (true) {
@@ -132,7 +128,7 @@ public static void main(String[] args) {
                             break;
                         }
                     } catch (Exception e) {
-                        System.out.println("\nInvalid input. Please enter a valid PIN.");
+                        System.out.println("Invalid PIN. PIN must be a 4-digit number");
                     }
                 }
 
@@ -141,7 +137,7 @@ public static void main(String[] args) {
                     option.closeAccount(accountNumber, pin);
                     System.out.println("\nAccount closed successfully.");
                 } catch (IllegalArgumentException e) {
-                    System.out.println("\nAccount not found or invalid PIN.");
+                    System.out.println("\n" + e.getMessage());
                 }
                 break;
             case 3:
@@ -167,10 +163,8 @@ public static void main(String[] args) {
                         break;
                     } catch (IllegalArgumentException e) {
                         System.out.println("\n" + e.getMessage());
-                    } catch (InputMismatchException e) {
-                        System.out.println("\nInvalid userInputCollection. Please enter a valid amount.");
-                        userInputCollection.nextLine();
                     }
+
                 }
 
                 while (true) {
@@ -188,15 +182,15 @@ public static void main(String[] args) {
                             break;
                         }
                     } catch (Exception e) {
-                        System.out.println("\nInvalid input. Please enter a valid PIN.");
+                        System.out.println("Invalid PIN. PIN must be a 4-digit number");
                     }
                 }
 
                 try {
                     option.deposit(accountNumber, pin, amount);
-                    System.out.println("\nDeposit successful.");
+                    System.out.println("\nDeposit of ₦" + amount + " was successful.");
                 } catch (IllegalArgumentException e) {
-                    System.out.println("\nAccount not found or invalid PIN.");
+                    System.out.println("\n" + e.getMessage());
                 }
                 break;
             case 4:
@@ -211,42 +205,35 @@ public static void main(String[] args) {
                     }
                 }
 
-
-                while(true) {
-                    try {
-                        System.out.print("\nEnter the amount to withdraw: ");
-                        amount = userInputCollection.nextDouble();
-                        userInputCollection.nextLine();
-                        option.withdraw(accountNumber, pin, amount);
-                        break;
-                    }catch (IllegalArgumentException e) {
-                    System.out.println("\n" + e.getMessage());}
-                }
-
                 while (true) {
                     try {
                         System.out.print("\nEnter your PIN: ");
                         String pinStr = userInputCollection.nextLine();
                         pin = Integer.parseInt(pinStr);
                         option.getPin(pin);
-                        System.out.print("\nConfirm your PIN: ");
-                        String confirmPinStr = userInputCollection.nextLine();
-                        confirmPin = Integer.parseInt(confirmPinStr);
-                        if (confirmPin != pin) {
-                            System.out.println("\nPIN do not match. Please try again.");
-                        } else {
-                            break;
-                        }
+                        break;
                     } catch (Exception e) {
-                        System.out.println("\nInvalid input. Please enter a valid PIN.");
+                        System.out.println("Invalid PIN. PIN must be a 4-digit number");
+                    }
+                }
+
+                while (true) {
+                    try {
+                        System.out.print("\nEnter the amount to withdraw: ");
+                        amount = userInputCollection.nextDouble();
+                        userInputCollection.nextLine();
+                        break;
+                    } catch (InputMismatchException e) {
+                        System.out.println("\nInvalid input. Please enter a valid amount.");
+                        userInputCollection.nextLine();
                     }
                 }
 
                 try {
                     option.withdraw(accountNumber, pin, amount);
-                    System.out.println("\nWithdrawal successful.");
+                    System.out.println("\nWithdrawal of ₦" + amount + " was successful.");
                 } catch (IllegalArgumentException e) {
-                    System.out.println("\nAccount not found or invalid PIN.");
+                    System.out.println("\n" + e.getMessage());
                 }
                 break;
             case 5:
@@ -269,15 +256,15 @@ public static void main(String[] args) {
                         option.getPin(pin);
                         break;
                     } catch (Exception e) {
-                        System.out.println("\nInvalid input. Please enter a valid PIN.");
+                        System.out.println("Invalid PIN. PIN must be a 4-digit number");
                     }
                 }
 
                 try {
                     double balance = option.getBalance(accountNumber, pin);
-                    System.out.println("\nYour balance is: " + balance);
+                    System.out.println("\nYour balance is: ₦" + balance);
                 } catch (IllegalArgumentException e) {
-                    System.out.println("\nAccount not found or invalid PIN.");
+                    System.out.println("\n" + e.getMessage());
                 }
                 break;
             case 6:
@@ -300,7 +287,7 @@ public static void main(String[] args) {
                         option.getPin(oldPin);
                         break;
                     } catch (Exception e) {
-                        System.out.println("\nInvalid input. Please enter a valid PIN.");
+                        System.out.println("Invalid PIN. PIN must be a 4-digit number");
                     }
                 }
 
@@ -313,7 +300,7 @@ public static void main(String[] args) {
                         option.getPin(newPin);
                         break;
                     } catch (Exception e) {
-                        System.out.println("\nInvalid input. Please enter a valid PIN.");
+                        System.out.println("Invalid PIN. PIN must be a 4-digit number");
                     }
                 }
 
@@ -322,7 +309,7 @@ public static void main(String[] args) {
                     option.changePin(accountNumber, oldPin, newPin);
                     System.out.println("\nPIN changed successfully.");
                 } catch (IllegalArgumentException e) {
-                    System.out.println("\nAccount not found or invalid old PIN.");
+                    System.out.println("\n" + e.getMessage());
                 }
                 break;
 
@@ -383,7 +370,7 @@ public static void main(String[] args) {
                             break;
                         }
                     } catch (Exception e) {
-                        System.out.println("\nInvalid input. Please enter a valid PIN.");
+                        System.out.println("Invalid PIN. PIN must be a 4-digit number");
                     }
                 }
 
