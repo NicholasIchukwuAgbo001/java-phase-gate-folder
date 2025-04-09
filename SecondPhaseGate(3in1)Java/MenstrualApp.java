@@ -1,22 +1,26 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 public class MenstrualApp {
 
     private LocalDate date;
     private int mainCycleLength;
     private int mainPeriodLength;
 
-
     public void lastDate(String date) {
         this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     public void cycleLength(int mainCycleLength) {
+        if(mainCycleLength < 1 || mainCycleLength > 30) {
+            throw new IllegalArgumentException("\nCycle length must be between 1 and 30.");
+        }
         this.mainCycleLength = mainCycleLength;
     }
 
     public void periodLength(int mainPeriodLength) {
+        if(mainPeriodLength < 1 || mainPeriodLength > 6) {
+            throw new IllegalArgumentException("\nPeriod length must be between 1 and 6.");
+        }
         this.mainPeriodLength = mainPeriodLength;
     }
 
@@ -32,15 +36,12 @@ public class MenstrualApp {
 
     public String calculateFertileStartDate() {
         LocalDate fertileStartDate = date.plusDays(mainCycleLength / 2 - 5);
-        LocalDate fertileEndDate = date.plusDays(mainCycleLength / 2);
         return fertileStartDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
-
-
-
 
     public String calculateFertileEndDate() {
         LocalDate fertileEndDate = date.plusDays(mainCycleLength / 2);
         return fertileEndDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
+    
 }

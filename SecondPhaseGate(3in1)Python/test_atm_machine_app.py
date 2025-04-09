@@ -1,10 +1,11 @@
 import unittest
-from atm_machine_app import AtmMachineApp
+
+from atm_machine_app import atm_machine_app
 
 class TestAtmMachineApp(unittest.TestCase):
     def setUp(self):
-        self.account1 = AtmMachineApp("Nicholas", "Ichukwu", 1010)
-        self.account2 = AtmMachineApp("Moses", "Idowu", 2020)
+        self.account1 = atm_machine_app("Nicholas", "Ichukwu", 1010)
+        self.account2 = atm_machine_app("Moses", "Idowu", 2020)
 
     def test_atm_machine_app_is_created(self):
         self.assertIsNotNone(self.account1)
@@ -20,7 +21,7 @@ class TestAtmMachineApp(unittest.TestCase):
         self.assertEqual(2020, self.account2.pin)
 
     def test_close_account1(self):
-        self.account1.close_account();
+        self.account1.close_account()
         self.assertTrue(self.account1._is_closed)
 
     def test_deposit_money(self):
