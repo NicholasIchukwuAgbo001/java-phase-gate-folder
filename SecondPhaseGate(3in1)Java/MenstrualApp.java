@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 public class MenstrualApp {
-
     private LocalDate date;
     private int mainCycleLength;
     private int mainPeriodLength;
@@ -11,15 +10,15 @@ public class MenstrualApp {
     }
 
     public void cycleLength(int mainCycleLength) {
-        if(mainCycleLength < 1 || mainCycleLength > 30) {
-            throw new IllegalArgumentException("\nCycle length must be between 1 and 30.");
+        if(mainCycleLength < 21 || mainCycleLength > 35) {
+            throw new IllegalArgumentException("\nCycle length must be between 21 and 35.");
         }
         this.mainCycleLength = mainCycleLength;
     }
 
     public void periodLength(int mainPeriodLength) {
-        if(mainPeriodLength < 1 || mainPeriodLength > 6) {
-            throw new IllegalArgumentException("\nPeriod length must be between 1 and 6.");
+        if(mainPeriodLength < 1 || mainPeriodLength > 7) {
+            throw new IllegalArgumentException("\nPeriod length must be between 1 and 7.");
         }
         this.mainPeriodLength = mainPeriodLength;
     }
@@ -50,9 +49,13 @@ public class MenstrualApp {
     }
 
     public String safeEndDate() {
-        LocalDate safeEnd = date.plusDays(mainCycleLength - 6 );
+        LocalDate safeEnd = date.plusDays(mainCycleLength + 23);
         return safeEnd.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
+    public String safeEndDate2() {
+        LocalDate safeEnd = date.plusDays(mainCycleLength + 29);
+        return safeEnd.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
 
 }

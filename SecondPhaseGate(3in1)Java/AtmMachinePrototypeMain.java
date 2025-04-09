@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
@@ -9,7 +10,7 @@ public static void main(String[] args) {
     int choice;
     String firstName;
     String lastName;
-    int pin = 0;
+    int pin;
     int confirmPin;
     String accountNumber;
     double amount;
@@ -90,7 +91,6 @@ public static void main(String[] args) {
                         System.out.println("Invalid PIN. PIN must be a 4-digit number");
                     }
                 }
-
 
                 try {
                     option.createAccount(firstName, lastName, pin);

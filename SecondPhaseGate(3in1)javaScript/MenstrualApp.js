@@ -8,10 +8,11 @@ class MenstrualApp {
     lastDate(date) {
         const dateRegex = /^\d{4}[\/-]\d{2}[\/-]\d{2}$/;
         if (!dateRegex.test(date)) {
-            throw new Error("Invalid date format. Please use yyyy-MM-dd");
+            throw new Error("Invalid date format. Please use yyyy/MM/dd");
         }
-        this.date = new Date(date.replace('-'));
+        this.date = new Date(date.replace(/-/g, '/'));
     }
+    
     
 
      cycleLength(length) {
@@ -21,15 +22,17 @@ class MenstrualApp {
     periodLength(length) {
         this.mainPeriodLength = length;
     }
-    nextPeriodDate() {
+
+    predictNextPeriodDate() {
         if (this.date && this.mainCycleLength) {
-            const nextDate = new Date(this.date);
-            nextDate.setDate(nextDate.getDate() + this.mainCycleLength);
-            return nextDate.toLocaleDateString();
+            const nextPeriodDate = new Date(this.date);
+            nextPeriodDate.setDate(nextPeriodDate.getDate() + this.mainCycleLength);
+            return nextPeriodDate.toLocaleDateString();
         } else {
             return "Please set the last date and cycle length first.";
         }
     }
+        
     ovulationDate() {
         if (this.date && this.mainCycleLength) {
             const ovulationDate = new Date(this.date);
@@ -59,6 +62,7 @@ class MenstrualApp {
             return "Please set the last date and cycle length first.";
         }
     }
+
 
 }
 

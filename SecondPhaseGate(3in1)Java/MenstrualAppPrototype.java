@@ -53,9 +53,9 @@ public static void main(String[] args) {
     System.out.println("Your fertile start date is: " + menstrualApp.calculateFertileStartDate());
     System.out.println("Your fertile end date is: " + menstrualApp.calculateFertileEndDate());
     System.out.println("Your next period date is: " + menstrualApp.predictNextPeriodDate());
-    System.out.println("Your safe start date is: " + menstrualApp.safeStartDate());
-    System.out.println("Your safe end date is: " + menstrualApp.safeEndDate());
-    System.out.println("Stay safe ma'am🤣");
+    System.out.println("Your safe start date (BEFORE) is: " + menstrualApp.predictNextPeriodDate() + " to " + menstrualApp.safeStartDate());
+    System.out.println("Your safe end date (AFTER) is: " + menstrualApp.safeEndDate() +  " to " + menstrualApp.safeEndDate2());
+    System.out.println("Stay Safe Biko");
 }
 
 

@@ -5,7 +5,7 @@ console.log("\nWelcome to your menstrual cycle tracker app");
 const prompt = require('prompt-sync')();
 
 while (true) {
-    let choice = prompt("\nEnter your last menstrual period date (yyyy-MM-dd): ");
+    let choice = prompt("Enter your last menstrual period date (yyyy/MM/dd): ");
     try {
         menstrualApp.lastDate(choice);
         break;
@@ -14,28 +14,30 @@ while (true) {
     }
 }
 
+
 while (true) {
-    let cycleLength = prompt("\nEnter your cycle length in days: ");
-    if (!isNaN(cycleLength) && cycleLength > 0) {
+    let cycleLength = prompt("Enter your cycle length in days: ");
+    if (!isNaN(cycleLength) && cycleLength >= 21 && cycleLength <= 35 && cycleLength % 1 === 0) {
         menstrualApp.cycleLength(cycleLength);
         break;
     } else {
-        console.error("\nInvalid cycle length. Please enter a positive number.");
+        console.error("Invalid cycle length. Please enter a number between 21 and 35.");
     }
 }
+
 
 while (true) {
-    let periodLength = prompt("\nEnter your period length in days: ");
-    if (!isNaN(periodLength) && periodLength > 0 && periodLength <= menstrualApp.mainCycleLength) {
-        menstrualApp.periodLength(periodLength);
-        break;
-    } else {
-        console.error("Invalid period length. Please enter a positive number that is less than or equal to your cycle length.");
+    let periodLength = prompt("Enter your period length in days: ");
+    if(!isNaN(periodLength) && periodLength >= 1 && periodLength <= 7 && periodLength % 1 === 0) {
+     menstrualApp.periodLength(periodLength);
+     break
+    }else{
+        console.error("Invalid period length. Please enter a number between 1 and 7. ")
     }
 }
 
-console.log("Your next period date is: " + menstrualApp.nextPeriodDate());
 console.log("Your ovulation date is: " + menstrualApp.ovulationDate());
 console.log("Your fertile start date is: " + menstrualApp.fertileStartDate());
 console.log("Your fertile end date is: " + menstrualApp.fertileEndDate());
+console.log("Your next period date is: " + menstrualApp.predictNextPeriodDate());
 console.log("Thank you for using the menstrual cycle tracker app. Have a great day!");

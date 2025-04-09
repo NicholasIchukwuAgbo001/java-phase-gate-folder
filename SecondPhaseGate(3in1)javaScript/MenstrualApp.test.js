@@ -6,7 +6,7 @@ test("predict next period date", () => {
     period.lastDate('2023/10/01');
     period.cycleLength(28);
     period.periodLength(5);
-    expect(period.nextPeriodDate()).toBe('10/29/2023');
+    expect(period.predictNextPeriodDate()).toBe('10/29/2023');
 });
 
 test("calculate ovulation date", () => {
@@ -29,3 +29,4 @@ test("calculate fertile end date", () => {
     period.periodLength(5);
     expect(period.fertileEndDate()).toBe('10/15/2023');
 });  
+
