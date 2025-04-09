@@ -51,5 +51,21 @@ public class MenstrualAppTest {
         menstrualApp.periodLength(5);
         assertEquals("2025-04-15", menstrualApp.calculateFertileEndDate());
     }
+
+    @Test
+    public void testToCalculateSafeStartDate() {
+        menstrualApp.lastDate("2025-04-01");
+        menstrualApp.cycleLength(28);
+        menstrualApp.periodLength(5);
+        assertEquals("2025-05-05", menstrualApp.safeStartDate());
+    }
+
+    @Test
+    public void testToCalculateSafeEndDate() {
+        menstrualApp.lastDate("2025-04-01");
+        menstrualApp.cycleLength(28);
+        menstrualApp.periodLength(5);
+        assertEquals("2025-04-23", menstrualApp.safeEndDate());
+    }
     
 }

@@ -49,10 +49,12 @@ public static void main(String[] args) {
         }
     }
 
-    System.out.println("\nYour next period date is: " + menstrualApp.predictNextPeriodDate());
-    System.out.println("Your ovulation date is: " + menstrualApp.calculateOvulationDate());
+    System.out.println("\nYour ovulation date is: " + menstrualApp.calculateOvulationDate());
     System.out.println("Your fertile start date is: " + menstrualApp.calculateFertileStartDate());
     System.out.println("Your fertile end date is: " + menstrualApp.calculateFertileEndDate());
+    System.out.println("Your next period date is: " + menstrualApp.predictNextPeriodDate());
+    System.out.println("Your safe start date is: " + menstrualApp.safeStartDate());
+    System.out.println("Your safe end date is: " + menstrualApp.safeEndDate());
     System.out.println("Stay safe ma'am🤣");
 }
 

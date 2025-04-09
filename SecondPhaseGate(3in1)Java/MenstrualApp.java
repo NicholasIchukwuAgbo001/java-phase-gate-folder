@@ -43,5 +43,16 @@ public class MenstrualApp {
         LocalDate fertileEndDate = date.plusDays(mainCycleLength / 2);
         return fertileEndDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
-    
+
+    public String safeStartDate() {
+        LocalDate safeStart = date.plusDays(mainCycleLength + 6 );
+        return safeStart.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    public String safeEndDate() {
+        LocalDate safeEnd = date.plusDays(mainCycleLength - 6 );
+        return safeEnd.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+
 }
