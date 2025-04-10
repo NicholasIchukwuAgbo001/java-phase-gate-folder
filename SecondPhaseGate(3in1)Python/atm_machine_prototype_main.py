@@ -1,7 +1,7 @@
-import atm_machine_prototype
+from atm_machine_prototype import atm_machine_main
 
 def main():
-    bank = atm_machine_prototype
+    bank = atm_machine_main
     while True:
         print("\n1. Create Account")
         print("2. Close Account")

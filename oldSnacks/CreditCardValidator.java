@@ -1,48 +1,61 @@
-
 import java.util.Scanner;
 
 public class CreditCardValidator {
 
     public static void main(String[] args) {
 
-        Scanner userInputCollection = new Scanner(System.in);
+        Scanner userInput = new Scanner(System.in);
 
-    	String cardType = "";
-	int cardnumber;
+        System.out.print("Enter your credit card number: ");
 
-        System.out.print("Hello, kindly enter card deatils to verify: ");
-        String creditCardNumber = userInputCollection.nextLine();
+        String creditCardNumber = userInput.nextLine();
 
-	cardnumber = Integer.parseInt(creditCardNumber);
+        if (isValidCreditCardNumber(creditCardNumber)) {
 
-	for(int count = 0; count < cardnumber; count++){
+            System.out.println("Credit Card Type: " + getCardType(creditCardNumber));
+
+            System.out.println("Credit Card Number: " + creditCardNumber);
+
+        } else {
+            System.out.println("Invalid credit card number.");
+        }
+    }
+
+
+    public static boolean isValidCreditCardNumber(String creditCardNumber) {
+
+        if (creditCardNumber.length() < 13 || creditCardNumber.length() > 16) {
+
+            return false;
+        }
+
+        return true;
+    }
+
+
+
+    public static String getCardType(String creditCardNumber) {
 
         if (creditCardNumber.startsWith("4")) {
 
-            cardType = "Visa Card";
+            return "Visa Card";
 
         } else if (creditCardNumber.startsWith("5")) {
 
-            cardType = "Master Card";
+            return "Master Card";
 
         } else if (creditCardNumber.startsWith("37")) {
 
-            cardType = "American Express Card";
+            return "American Express Card";
 
         } else if (creditCardNumber.startsWith("6")) {
 
-            cardType = "Discover Card";
+            return "Discover Card";
 
         } else {
-
-            cardType = "Unknown";
+            return "Unknown";
         }
-
-     }
-
-        System.out.println("Credit Card Type: " + cardType);
-	System.out.println("Credit Card number: " + creditCardNumber);
-        
-  }
+    }
 
 }
+

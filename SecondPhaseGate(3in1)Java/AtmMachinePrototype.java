@@ -52,7 +52,7 @@ public class AtmMachinePrototype {
     public void createAccount(String firstName, String lastName, int pin) {
         if (firstName.matches("[a-zA-Z\\s]+") && lastName.matches("[a-zA-Z\\s]+") && !lastName.isEmpty() && firstName.length() >= 3  && lastName.length() >= 3) {
             Random random = new Random();
-            String accountNumber = "419" + String.format("%7d", random.nextInt(1000000000));
+            String accountNumber = String.format("%010d", random.nextInt(1000000000));
             AtmMachineApp account = new AtmMachineApp(accountNumber, firstName, lastName, pin);
             accounts.add(account);
         } else {

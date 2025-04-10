@@ -19,7 +19,7 @@ public static void main(String[] args) {
     String accountNumber1;
     String accountNumber2;
 
-    System.out.println("\nWELCOME TO BANKE BANK 🤝");
+    System.out.println("\nHELLO WELCOME TO BANKE BANK");
 
     while (true) {
         System.out.println("\n1. Create Account");
@@ -36,13 +36,13 @@ public static void main(String[] args) {
                 System.out.print("\nEnter your choice: ");
                 String input = userInputCollection.nextLine();
                 if (input.isEmpty()) {
-                    System.out.print("Invalid input, Please enter a valid choice,");
+                    System.out.print("choice can't be empty, Please enter a valid choice\n");
                     continue;
                 }
                 choice = Integer.parseInt(input);
                 break;
             } catch (Exception e) {
-                System.out.print("Invalid input, Please enter a valid choice,");
+                System.out.print("Invalid input, Please enter a valid choice\n");
             }
         }
 
@@ -94,8 +94,10 @@ public static void main(String[] args) {
 
                 try {
                     option.createAccount(firstName, lastName, pin);
-                    System.out.println("\nAccount created successfully.");
+                    System.out.println("\nWELCOME TO BANKE BANK 🤝");
+                    System.out.println("\nAccount created successfully. " + firstName + "  " +  lastName );
                     System.out.println("Your account number is: " + option.getAccountNumber2());
+                    System.out.println("Save your account number for future transactions/use.");
                     break;
                 } catch (IllegalArgumentException e) {
                     System.out.println("\n" + e.getMessage());
