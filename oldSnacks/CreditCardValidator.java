@@ -16,20 +16,42 @@ public class CreditCardValidator {
 
             System.out.println("Credit Card Number: " + creditCardNumber);
 
+	    System.out.println("Credit Card Validity Status: Valid" );
+
         } else {
-            System.out.println("Invalid credit card number.");
+	    System.out.println("Credit Card Type:  Invalid card");
+            System.out.println("Credit Card Number: " + creditCardNumber);
+            System.out.println("Credit Card Validity Status: Invalid" );
         }
     }
 
 
+
     public static boolean isValidCreditCardNumber(String creditCardNumber) {
 
-        if (creditCardNumber.length() < 13 || creditCardNumber.length() > 16) {
+        int sum = 0;
 
-            return false;
+        for (int count = 0; count < creditCardNumber.length(); count++) {
+
+        int num = Integer.parseInt(creditCardNumber.substring(count, count + 1));
+
+        if (count % 2 == 0) {
+
+        num *= 2;
+
+        if (num > 9) {
+
+        num -= 9;
+
         }
 
-        return true;
+        }
+
+       sum += num;
+
+        }
+
+        return (sum % 10 == 0);
     }
 
 

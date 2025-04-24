@@ -125,12 +125,10 @@ public class StudentGradesApp {
 
 	System.out.println("===============================================================");
 
-	
+	double total = 0;
 
 	for (int count = 0; count < numbersOfStudents; count++) {
 	System.out.print("Student " + (count + 1) + ":\t");
-
-	int total = 0;
 
 	for (int counter = 0; counter < numbersOfSubjects; counter++) {
 
@@ -140,10 +138,10 @@ public class StudentGradesApp {
 
 	}
 
-	double average = (double) total / numbersOfSubjects;
+	double average = total / numbersOfSubjects;
 
-	System.out.printf("%d\t%.2f%n", total, average);
-
+	System.out.printf("%.2f\t%.2f%n", total, average);
+   
 	}
 
 	System.out.println("===============================================================");
