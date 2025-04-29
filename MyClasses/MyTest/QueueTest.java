@@ -61,4 +61,21 @@ public class QueueTest {
         assertTrue(queue.isFull());
     }
 
+    @Test
+    public void testClear() {
+        queue.enqueue(9);
+        queue.enqueue(9);
+        queue.enqueue(9);
+        queue.clear();
+        assertEquals(0, queue.getSize());
+    }
+
+    @Test
+    public void testContains() {
+        queue.enqueue(7);
+        queue.enqueue(2);
+        queue.enqueue(9);
+        assertEquals(7, queue.contains(7));
+    }
+
 }

@@ -8,6 +8,7 @@ public class BankMain {
     public static void main(String[] args) {
 
         Bank option = new Bank();
+
         Scanner userInputCollection = new Scanner(System.in);
 
         int choice;
