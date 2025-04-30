@@ -22,9 +22,6 @@ public class PersonMain {
                 System.out.println("\nEnter Your Name: ");
                 String name = userInputCollection.next();
 
-                System.out.println("Enter Your Description: ");
-                String description = userInputCollection.next();
-
                 System.out.println("Enter your problem type: ");
                 String problemType = userInputCollection.next();
             }else if (choice == 2) {

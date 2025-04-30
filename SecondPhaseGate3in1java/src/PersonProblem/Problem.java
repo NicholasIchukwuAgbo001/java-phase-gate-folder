@@ -2,13 +2,12 @@ package PersonProblem;
 
 public class Problem {
     private final String name;
-    private final String description;
-    private final String type;
+
+    private final ProblemType type;
     private boolean solved;
 
-    public Problem(String name, String description, String type) {
+    public Problem(String name, ProblemType type) {
         this.name = name;
-        this.description = description;
         this.type = type;
         this.solved = false;
     }
@@ -21,7 +20,7 @@ public class Problem {
         return name;
     }
 
-    public String getType() {
+    public ProblemType getType() {
         return type;
     }
 
@@ -29,8 +28,5 @@ public class Problem {
         return solved;
     }
 
-    public String getDescription() {
-        return description;
-    }
 }
 
