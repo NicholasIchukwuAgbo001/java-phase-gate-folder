@@ -1,0 +1,52 @@
+@startuml
+Package Things{
+
+class Things{
+}
+
+class LivingThings{
+}
+
+class NonLivingThings{
+}
+
+class Plants{
+}
+
+class Animals{
+}
+
+class Vertebrates{
+}
+
+class Invertebrates{
+}
+
+class Mammals{
+}
+
+class Aves{
+}
+
+class Reptiles{
+}
+
+class Amphibians{
+}
+
+class Pisces{
+}
+
+Things <-- LivingThings
+Things <-- NonLivingThings
+LivingThings <-- Plants
+LivingThings <-- Animals
+Animals <-- Vertebrates
+Animals <-- Invertebrates
+Vertebrates <-- Mammals
+Vertebrates <-- Aves
+Vertebrates <-- Reptiles
+Vertebrates <-- Amphibians
+Vertebrates <-- Pisces
+}
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+package SchoolBuilding{
+    class Person {
+        - name: String
+    }
+
+    class Admin extends Person {
+        + addStudent(student: Student)
+        + removeStudent(student: Student)
+        + addFacilitator(facilitator: Facilitator)
+        + removeFacilitator(facilitator: Facilitator)
+    }
+
+    class Student extends Person {
+        - email: String
+        - phoneNumber: String
+        - cohortNumber: String
+    }
+
+    class Facilitator extends Person {
+        - languageTaking: String
+    }
+
+    Admin *-- Student
+    Admin *-- Facilitator
+}
+
+@enduml
