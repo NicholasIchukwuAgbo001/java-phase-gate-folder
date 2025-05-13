@@ -1,12 +1,13 @@
 package SchoolBuilding;
 
 
-public class Student{
+public class Student extends Person {
     private String name;
     private String phoneNumber;
-    private String cohortNumber;
+    private CohortNumber cohortNumber;
 
-    public Student(String name, String phoneNumber, String cohortNumber) {
+    public Student(String name, String phoneNumber, CohortNumber cohortNumber) {
+        super(name);
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.cohortNumber = cohortNumber;
@@ -19,7 +20,7 @@ public class Student{
         return phoneNumber;
     }
 
-    public String getCohortNumber() {
+    public CohortNumber getCohortNumber() {
         return cohortNumber;
     }
 

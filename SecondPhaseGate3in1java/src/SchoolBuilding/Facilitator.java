@@ -1,10 +1,11 @@
 package SchoolBuilding;
 
-public class Facilitator {
+public class Facilitator extends Person {
     private  String facilitatorName;
-    private String languageTaking;
+    private LanguageType languageTaking;
 
-    public Facilitator(String facilitatorName, String languageTaking) {
+    public Facilitator(String facilitatorName, LanguageType languageTaking) {
+        super(facilitatorName);
         this.facilitatorName = facilitatorName;
         this.languageTaking = languageTaking;
     }
@@ -13,7 +14,7 @@ public class Facilitator {
         return facilitatorName;
     }
 
-    public String getLanguageTaking() {
+    public LanguageType getLanguageTaking() {
         return languageTaking;
     }
 

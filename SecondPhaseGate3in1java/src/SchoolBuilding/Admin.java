@@ -2,11 +2,12 @@ package SchoolBuilding;
 
 import java.util.ArrayList;
 
-public class Admin {
+public class Admin extends Person {
     private ArrayList<Student> students;
     private ArrayList<Facilitator> facilitators;
 
-    public Admin() {
+    public Admin(String name) {
+        super(name);
         this.students = new ArrayList<>();
         this.facilitators = new ArrayList<>();
     }
@@ -59,7 +60,7 @@ public class Admin {
         boolean facilitatorFound = false;
         for (Facilitator facilitatorHolder : facilitators) {
             boolean checkName = facilitatorHolder.getFacilitatorName().equalsIgnoreCase(facilitator.getFacilitatorName());
-            boolean checkLanguage = facilitatorHolder.getLanguageTaking().equalsIgnoreCase(facilitator.getLanguageTaking());
+            boolean checkLanguage = facilitatorHolder.getLanguageTaking().equals(facilitator.getLanguageTaking());
             if (checkName && checkLanguage) {
                 facilitators.remove(facilitatorHolder);
                 facilitatorFound = true;

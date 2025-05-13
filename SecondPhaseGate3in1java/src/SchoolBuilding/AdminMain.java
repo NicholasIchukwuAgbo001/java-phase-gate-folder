@@ -6,15 +6,15 @@ public class AdminMain {
     public static void main(String[] args) {
         Scanner userInputCollection = new Scanner(System.in);
 
-        Admin admin = new Admin();
+        Admin admin = new Admin("Mr Chibuzor");
 
         System.out.println("Welcome Semicolon portal");
 
         String studentName;
         String  studentPhoneNumber;
-        String studentCohortNumber;
+        CohortNumber studentCohortNumber;
         String facilitatorName;
-        String languageName;
+        LanguageType languageName;
 
         while (true) {
             System.out.println("""
@@ -65,9 +65,9 @@ public class AdminMain {
 
                 while (true) {
                     try {
-                        System.out.print("\nEnter Student Cohort Number: ");
-                        studentCohortNumber = userInputCollection.nextLine();
-                        validateCohortNumber(studentCohortNumber);
+                        System.out.print("\nEnter Student Cohort Number (C24, C21..etc): ");
+                        studentCohortNumber = CohortNumber.valueOf(userInputCollection.nextLine());
+                        validateCohortNumber(String.valueOf(studentCohortNumber));
                         break;
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -82,7 +82,7 @@ public class AdminMain {
                     System.out.println(e.getMessage());
                 }
             }else if (choice == 2) {
-                System.out.print("\nStudents List");
+                System.out.print("\nStudents: ");
                 System.out.println(admin.getStudents());
             } else if (choice == 3) {
                 while (true) {
@@ -109,9 +109,9 @@ public class AdminMain {
 
                 while (true) {
                     try {
-                        System.out.print("\nEnter Student Cohort Number: ");
-                        studentCohortNumber = userInputCollection.nextLine();
-                        validateCohortNumber(studentCohortNumber);
+                        System.out.print("\nEnter Student Cohort Number (C24, C21..etc): ");
+                        studentCohortNumber = CohortNumber.valueOf(userInputCollection.nextLine());
+                        validateCohortNumber(String.valueOf(studentCohortNumber));
                         break;
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -140,9 +140,9 @@ public class AdminMain {
 
                 while (true) {
                     try {
-                        System.out.print("\nEnter Language HE/SHE Take's: ");
-                        languageName = userInputCollection.nextLine();
-                        validateName(languageName);
+                        System.out.print("\nEnter Language HE/SHE Take's, must capital letter(JAVA): ");
+                        languageName = LanguageType.valueOf(userInputCollection.nextLine());
+                        validateName(String.valueOf(languageName));
                         break;
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -157,7 +157,7 @@ public class AdminMain {
                     System.out.println(e.getMessage());
                 }
             }else if (choice == 5) {
-                System.out.print("\nFacilitators List");
+                System.out.print("\nFacilitators: ");
                 System.out.println(admin.getFacilitators());
             } else if (choice == 6) {
                 while (true) {
@@ -173,9 +173,9 @@ public class AdminMain {
 
                 while (true) {
                     try {
-                        System.out.print("\nEnter Language HE/SHE Take's: ");
-                        languageName = userInputCollection.nextLine();
-                        validateName(languageName);
+                        System.out.print("\nEnter Language HE/SHE Take's, must capital letter(JAVA): ");
+                        languageName = LanguageType.valueOf(userInputCollection.nextLine());
+                        validateName(String.valueOf(languageName));
                         break;
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -191,8 +191,8 @@ public class AdminMain {
                 }
             } else if (choice == 7) {
                 System.out.println("\nExiting The Application...");
-                System.out.println("Bye.......................");
-                System.exit(0);
+                System.out.println("Bye...");
+                break;
             }else{
                 System.out.println("Invalid choice!");
             }
@@ -205,29 +205,27 @@ public class AdminMain {
     }
 
 
-
-
 private static void validateName(String name) {
     if (!name.matches("^[A-Za-z\\s]+")) {
         throw new IllegalArgumentException("Invalid Student Name!");
     }
-    if(name.isBlank()) {
+        if(name.isBlank()) {
         throw new IllegalArgumentException("Invalid Student Name!");
     }
+}
+
+
+private static void validateNigerianPhoneNumber(String phoneNumber) {
+    String regex = "^\\+?234\\d{10}$|^0\\d{10}$";
+    if (!phoneNumber.matches(regex)) {
+        throw new IllegalArgumentException("Invalid Phone Number, Only Nigeria Country Phone Numbers are supported!");
+    }
+}
+
+private static void validateCohortNumber(String cohortNumber) {
+    if (!cohortNumber.matches("^[0-9A-Za-z\\s]+")) {
+        throw new IllegalArgumentException("Invalid Student Cohort Number!");
+    }
  }
-
-
-    private static void validateNigerianPhoneNumber(String phoneNumber) {
-        String regex = "^\\+?234\\d{10}$|^0\\d{10}$";
-        if (!phoneNumber.matches(regex)) {
-            throw new IllegalArgumentException("Invalid Phone Number, Only Nigeria Country Phone Numbers are supported!");
-        }
-    }
-
-    private static void validateCohortNumber(String cohortNumber) {
-        if (!cohortNumber.matches("\\d+")) {
-            throw new IllegalArgumentException("Invalid Student Cohort Number!");
-        }
-    }
 
 }
